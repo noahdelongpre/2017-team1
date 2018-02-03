@@ -31,6 +31,11 @@ public class DestroyByContact : MonoBehaviour
             return;
         }
 
+		if (other.tag == "Log") 
+		{
+			return;
+		}
+
         //detects when the player is destroyed and ends the game
         if (other.tag == "Player")
         {

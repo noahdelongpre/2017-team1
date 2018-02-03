@@ -46,9 +46,11 @@ public class GameController : MonoBehaviour
 	private bool diffCheck;
 
     private GameObject terrain;
+	private GameObject logBlock;
 
     private Vector3 treeSpawnValues = new Vector3(8, -.75f, 250);
     private Vector3 rockSpawnValues = new Vector3(8, .60f, 250);
+	private Vector3 logSpawnValues = new Vector3 (0, .67f, 250); 
 
     public int diffCount;
     public int difficulty;
@@ -69,6 +71,7 @@ public class GameController : MonoBehaviour
 
         StartCoroutine(SpawnArrows());
 		StartCoroutine(SpawnTerrain());
+		StartCoroutine (Spawn2LaneLog ());
 
         score = 0;
         diffCount = 1;
@@ -248,6 +251,56 @@ public class GameController : MonoBehaviour
             {
                 break;
             }
+		}
+	}
+
+	IEnumerator Spawn2LaneLog()
+	{
+		Vector3 spawnPosition;
+
+		while (true)
+		{
+			float xrand = Random.Range (0, 4);
+			Debug.Log ("xrand is " + xrand);
+			float xValue;
+			if (xrand  <= 2) {
+				xValue = -.3f; //Right and Center Lane
+			}
+			else {
+				xValue = -3.8f; //Left and Center Lane
+			}
+
+			Quaternion spawnRotation = Quaternion.identity;
+			spawnRotation [1] = 1;
+			spawnRotation [0] = 0;
+			//spawnRotation [2] = 1;
+
+			string tText = "Log";
+			spawnPosition = new Vector3(xValue, logSpawnValues.y, logSpawnValues.z);
+
+			//float trand = Random.Range(0, 4);
+			int trand = 0;
+			if (trand < 2) {
+				//tText = "";
+				//spawnPosition = new Vector3(xVal, logSpawnValues.y, logSpawnValues.z);
+			} else {
+				// Location for more walls and other stuff
+				//tText = "Terrain1";
+				//spawnPosition = new Vector3(xVal * rockSpawnValues.x, rockSpawnValues.y, rockSpawnValues.z);
+			}
+
+			logBlock = GameObject.FindWithTag(tText);
+
+			Instantiate(logBlock, spawnPosition, spawnRotation);
+
+			tSpawnWait = Random.Range(tSpawnWaitMin, tSpawnWaitMax);
+			yield return new WaitForSeconds(tSpawnWait);
+
+
+			if (gameOver)
+			{
+				break;
+			}
 		}
 	}
 
