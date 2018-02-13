@@ -5,8 +5,8 @@ public class PlayerMotor : MonoBehaviour
 {
     //Movement
     private CharacterController controller;
-    private float jumpforce = 6.0f;
-    private float gravity = 9.8f;
+    private float jumpforce = 6.0f * 1.5f;
+    private float gravity = 9.8f * 2;
     private float verticalVelocity;
     private float speed = 10.0f;
 	private bool isMoving;
