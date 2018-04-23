@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour
 {
+
+    /*
 	public static float speed = 50f;
     private void Start()
     {
@@ -28,4 +30,6 @@ public class SpeedUp : MonoBehaviour
 	{
 	    speed = 50f;
 	}
+
+    */
 }
